@@ -9,7 +9,7 @@ alerting:
   alertmanagers:
     - static_configs:
         - targets:
-           - 65.0.71.243:9093
+           - 65.2.122.181:9093 #alert manager ip:port
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -31,4 +31,22 @@ scrape_configs:
         # metrics_path defaults to '/metrics'
         # scheme defaults to 'http'.
     static_configs:
-      - targets: ["13.127.40.254:9100"] # Target node exporter endpoint
+      - targets: ["52.66.240.12:9100"] # Target node exporter endpoint
+
+  - job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]  # Look for a HTTP 200 response.
+    static_configs:
+      - targets:
+        - http://prometheus.io    # Target to probe with http.
+        - https://prometheus.io   # Target to probe with https.
+        - http://52.66.240.12:8080/ # Target to probe with http on port 8080.
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 65.2.122.181:9115  # The blackbox exporter's real hostname:port.
+
