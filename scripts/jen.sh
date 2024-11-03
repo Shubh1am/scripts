@@ -1,4 +1,5 @@
 #####INSTALL JAVA 17 JRE######
+set -x
 sudo apt install openjdk-17-jre-headless -y # version 17.0.12+7-1ubuntu2~24.04
 
 # Installing Jenkins
