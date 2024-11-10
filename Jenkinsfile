@@ -14,11 +14,11 @@ pipeline {
 
         stage('SSH and Run Ansible Playbooks') {
             steps {
-\\                script {
-\\                    def ec2Instances = [
-\\                        '192.168.1.100',
-\\                        '192.168.1.101'
-\\                    ]
+                script {
+//                    def ec2Instances = [
+//                        '192.168.1.100',
+//                        '192.168.1.101'
+//                    ]
 
                     ec2Instances.each { instanceIp ->
                         // Execute SSH script with instance IP as argument
