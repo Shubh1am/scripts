@@ -3,7 +3,7 @@
 # Replace with your Jenkins URL and authentication credentials
 JENKINS_URL="http://13.233.2.248:8080/job/asd/api/json"
 JENKINS_USER="shubh"
-JENKINS_TOKEN="1146881bbfd641d47f75b41a6e14f0cfa7"
+JENKINS_TOKEN="$1"
 
 # Use curl to fetch the JSON data
 response=$(curl -u "$JENKINS_USER:$JENKINS_TOKEN" "$JENKINS_URL")
