@@ -45,6 +45,8 @@ jobs:
       - name: Zip the Directory
         run: |
           zip -r output.zip ${{ env.target_dir }}
+          pwd 
+          ls -ltra
 
       # Step 4: Upload the ZIP file as an artifact
       - name: Upload Artifact
