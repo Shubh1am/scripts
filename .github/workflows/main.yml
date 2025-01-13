@@ -1,0 +1,54 @@
+name: Zip Folders Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      folders:
+        description: "Comma-separated list of folders to copy and zip"
+        required: true
+        # default: "folder1,folder2"
+
+jobs:
+  zip-folders:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Parse input and prepare the directory
+      - name: Parse Input and Prepare Directory
+        id: prepare
+        run: |
+          # Define variables
+          INPUT_FOLDERS="${{ github.event.inputs.folders }}"
+          TARGET_DIR="output"
+
+          # Create the target directory
+          mkdir -p $TARGET_DIR
+
+          # Copy each folder to the target directory
+          IFS=',' read -ra FOLDERS <<< "$INPUT_FOLDERS"
+          for folder in "${FOLDERS[@]}"; do
+            if [ -d "$folder" ]; then
+              cp -r "$folder" "$TARGET_DIR/"
+            else
+              echo "Warning: Folder '$folder' does not exist and will be skipped."
+            fi
+          done
+
+          # Export the target directory for later steps
+          echo "target_dir=$TARGET_DIR" >> $GITHUB_ENV
+
+      # Step 3: Zip the directory
+      - name: Zip the Directory
+        run: |
+          zip -r output.zip ${{ env.target_dir }}
+
+      # Step 4: Upload the ZIP file as an artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: zipped-folders
+          path: output.zip
