@@ -40,6 +40,8 @@ jobs:
 
           # Export the target directory for later steps
           echo "target_dir=$TARGET_DIR" >> $GITHUB_ENV
+          pwd
+          ls -ltra
 
       # Step 3: Zip the directory
       - name: Zip the Directory
