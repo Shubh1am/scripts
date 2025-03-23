@@ -3,7 +3,7 @@
 ##################SSH to multiple instances and end#####################
 ########
 ########
-ip_addresses=("13.201.89.53" "3.110.27.51" "65.0.107.51" "3.7.45.95")  # Replace with your IP addresses
+ip_addresses=("3.110.43.186" "15.207.71.234" "13.126.17.167" "15.206.148.12")  # Replace with your IP addresses
 commands=("ls -l")  # Replace with your desired commands
 
 for ip in "${ip_addresses[@]}"; do
