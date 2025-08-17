@@ -1,6 +1,7 @@
 #####INSTALL JAVA 17 JRE######
 set -x
-sudo apt install openjdk-17-jre-headless -y # version 17.0.12+7-1ubuntu2~24.04
+#sudo apt install openjdk-17-jre-headless -y # version 17.0.12+7-1ubuntu2~24.04
+sudo apt install openjdk-17-jre-headless -y
 
 # Installing Jenkins
 sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
@@ -13,8 +14,11 @@ sudo apt-get install jenkins
 
 sudo chown -R jenkins:jenkins /var/lib/jenkins
 
+sleep 5
 sudo systemctl enable jenkins
+sleep 5
 sudo systemctl start jenkins
+sleep 5
 sudo systemctl status jenkins > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
