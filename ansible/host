@@ -1,11 +1,11 @@
 [master]
-server1 ansible_host=13.201.89.53
-# localhost ansible_connection=local #for accessing the local server
+#server1 ansible_host=
+localhost ansible_connection=local #for accessing the local server
 
 [workers]
-server2 ansible_host=3.110.27.51
-server3 ansible_host=65.0.107.51
-server4 ansible_host=3.7.45.95
+server2 ansible_host=54.225.37.98
+server3 ansible_host=34.230.22.49
+server4 ansible_host=54.242.142.170
 
 
 
